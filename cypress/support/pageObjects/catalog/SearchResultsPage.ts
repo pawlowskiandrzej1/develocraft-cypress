@@ -1,9 +1,8 @@
 import { Routes } from '../../routes';
 
 const selectors = {
-  productCards: '.woocommerce.columns-4 .etheme-product-grid-item.product',
+  productCards: '.etheme-product-grid-item.product',
   productTitle: 'h2.woocommerce-loop-product__title a',
-  productLink: 'h2.woocommerce-loop-product__title a',
   priceElement: '.etheme-product-grid-content .price',
   priceFilterHeading: '.widget_price_filter h4.widget-title',
   minPriceInput: 'input[name="min_price"]',
@@ -54,7 +53,7 @@ class SearchResultsPageActions {
    * @param index - Product index (default: 0)
    */
   openProductAt(index: number = 0) {
-    this.getProductCards().eq(index).find(selectors.productLink).first().click();
+    this.getProductCards().eq(index).find(selectors.productTitle).first().click();
   }
 }
 

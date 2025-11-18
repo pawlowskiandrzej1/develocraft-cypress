@@ -3,7 +3,6 @@ import { Routes } from '../../routes';
 const selectors = {
   cartItems: '.woocommerce-cart-form tr.cart_item',
   cartButton: 'a[href*="/cart/"]',
-  productNameCell: 'td.product-name',
 } as const;
 
 class CartPageActions {
