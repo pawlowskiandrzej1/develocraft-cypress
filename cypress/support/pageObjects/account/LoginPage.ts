@@ -25,9 +25,6 @@ class LoginPageActions {
 }
 
 class LoginPageAssertions {
-  /**
-   * Asserts successful login by verifying URL change.
-   */
   assertSuccessfulLogin() {
     cy.url().should('not.include', Routes.MY_ACCOUNT);
   }

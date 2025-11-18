@@ -61,9 +61,6 @@ class RegistrationPageAssertions {
     this.assertFieldRequired(selectors.passwordInput);
   }
 
-  /**
-   * Asserts successful registration by verifying URL change.
-   */
   assertSuccessfulRegistration() {
     cy.url().should('not.include', Routes.MY_ACCOUNT);
   }

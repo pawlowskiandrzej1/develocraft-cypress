@@ -67,9 +67,6 @@ class SearchResultsPageAssertions {
     this.getProductCards().should('exist').and('have.length.greaterThan', 0);
   }
 
-  /**
-   * Asserts that price filter was applied (checks URL parameters).
-   */
   assertPriceFilterApplied(minPrice: number, maxPrice: number) {
     cy.url().should('include', `min_price=${minPrice}`).and('include', `max_price=${maxPrice}`);
     this.getProductCards().should('exist');
@@ -121,9 +118,6 @@ class SearchResultsPageAssertions {
     });
   }
 
-  /**
-   * Combines search term and price range validation.
-   */
   assertProductsMatchCriteria(options: { searchTerm?: string; minPrice?: number; maxPrice?: number }) {
     if (options.searchTerm) {
       this.assertProductsMatchSearchTerm(options.searchTerm);
