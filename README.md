@@ -2,6 +2,15 @@
 
 Automated test suite for e-commerce website validation using Cypress and TypeScript.
 
+## Design Patterns
+
+- **Page Object Model (POM)**: Page interactions encapsulated in classes with extracted selectors
+- **Action/Assertion Split**: Each page exposes dedicated action and assertion classes for scalability
+- **DRY Principle**: Shared setup logic in `e2e.ts`, reusable page methods, centralized routes
+- **Factory Pattern**: `userFactory` generates unique test data with faker
+- **Single Responsibility**: Each page object handles one page, methods have focused purposes
+- **Separation of Concerns**: Tests, page objects, and data generation are clearly separated
+
 ## Setup
 
 ```bash
@@ -23,14 +32,6 @@ npm run cy:run
 - **Cypress** 15.6.0
 - **TypeScript** 5.9.3
 - **@faker-js/faker** 10.1.0
-
-## Design Patterns
-
-- **Page Object Model (POM)**: Page interactions encapsulated in classes with extracted selectors
-- **DRY Principle**: Shared setup logic in `e2e.ts`, reusable page methods, centralized routes
-- **Factory Pattern**: `userFactory` generates unique test data with faker
-- **Single Responsibility**: Each page object handles one page, methods have focused purposes
-- **Separation of Concerns**: Tests, page objects, and data generation are clearly separated
 
 ## Target Website
 

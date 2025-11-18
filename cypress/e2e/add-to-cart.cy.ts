@@ -1,37 +1,37 @@
-import SearchResultsPage from '../support/pageObjects/catalog/SearchResultsPage';
-import ProductPage from '../support/pageObjects/catalog/ProductPage';
-import CartPage from '../support/pageObjects/cart/CartPage';
+import { SearchResultsPageActions, SearchResultsPageAssertions } from '../support/pageObjects/catalog/SearchResultsPage';
+import { ProductPageActions } from '../support/pageObjects/catalog/ProductPage';
+import { CartPageActions, CartPageAssertions } from '../support/pageObjects/cart/CartPage';
 import { Routes } from '../support/routes';
 
 describe('Adding Items to Cart', () => {
-  const searchResultsPage = new SearchResultsPage();
-  const productPage = new ProductPage();
-  const cartPage = new CartPage();
+  const searchResultsActions = new SearchResultsPageActions();
+  const searchResultsAssertions = new SearchResultsPageAssertions();
+  const productPageActions = new ProductPageActions();
+  const cartPageActions = new CartPageActions();
+  const cartPageAssertions = new CartPageAssertions();
 
   const SEARCH_TERM = 'google nest';
 
   it('should add product to cart and verify cart updates', () => {
     cy.visit(Routes.SHOP);
 
-    searchResultsPage.search(SEARCH_TERM);
-    searchResultsPage.assertSearchResults(SEARCH_TERM);
+    searchResultsActions.search(SEARCH_TERM);
+    searchResultsAssertions.assertSearchResults(SEARCH_TERM);
 
-    // Capture product name using Cypress alias for better timing handling
-    searchResultsPage.getProductCards()
-      .first()
-      .find(searchResultsPage.selectors.productTitle)
+    searchResultsActions
+      .getProductTitleAt(0)
       .invoke('text')
       .then((name) => name.trim())
       .as('productName');
 
-    searchResultsPage.openProductAt(0);
+    searchResultsActions.openProductAt(0);
 
-    productPage.addToCart();
-    cartPage.openCart();
+    productPageActions.addToCart();
+    cartPageActions.openCart();
 
     cy.get<string>('@productName').then((productName) => {
-      cartPage.assertCartContainsProduct(productName);
-      cartPage.assertCartNotEmpty();
+      cartPageAssertions.assertCartContainsProduct(productName);
+      cartPageAssertions.assertCartNotEmpty();
     });
   });
 });

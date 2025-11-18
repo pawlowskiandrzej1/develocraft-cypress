@@ -1,12 +1,12 @@
 import { Routes } from '../../routes';
 
-class CartPage {
-  readonly selectors = {
-    cartItems: '.woocommerce-cart-form tr.cart_item',
-    cartButton: 'a[href*="/cart/"]',
-    productNameCell: 'td.product-name',
-  };
+const selectors = {
+  cartItems: '.woocommerce-cart-form tr.cart_item',
+  cartButton: 'a[href*="/cart/"]',
+  productNameCell: 'td.product-name',
+} as const;
 
+class CartPageActions {
   visit() {
     cy.visit(Routes.CART);
   }
@@ -15,16 +15,18 @@ class CartPage {
    * Opens cart page by clicking cart button.
    */
   openCart() {
-    cy.get(this.selectors.cartButton).first().click();
+    cy.get(selectors.cartButton).first().click();
   }
+}
 
+class CartPageAssertions {
   /**
    * Asserts that cart contains a product with the specified name.
    * @param productName - Expected product name
    */
   assertCartContainsProduct(productName: string) {
-    cy.get(this.selectors.cartItems).should('exist');
-    cy.get(this.selectors.cartItems).first().should('contain.text', productName);
+    cy.get(selectors.cartItems).should('exist');
+    cy.get(selectors.cartItems).first().should('contain.text', productName);
   }
 
   /**
@@ -32,19 +34,15 @@ class CartPage {
    * @param count - Expected number of cart items
    */
   assertCartItemCount(count: number) {
-    cy.get(this.selectors.cartItems).should('have.length', count);
-  }
-
-  getCartItems() {
-    return cy.get(this.selectors.cartItems);
+    cy.get(selectors.cartItems).should('have.length', count);
   }
 
   /**
    * Asserts that cart is not empty (contains at least one item).
    */
   assertCartNotEmpty() {
-    cy.get(this.selectors.cartItems).should('have.length.greaterThan', 0);
+    cy.get(selectors.cartItems).should('have.length.greaterThan', 0);
   }
 }
 
-export default CartPage;
+export { CartPageActions, CartPageAssertions };
