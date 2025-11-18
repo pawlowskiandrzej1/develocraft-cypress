@@ -1,0 +1,29 @@
+{
+  "name": "develocraft-cypress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run cy:run",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pawlowskiandrzej1/develocraft-cypress.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pawlowskiandrzej1/develocraft-cypress/issues"
+  },
+  "homepage": "https://github.com/pawlowskiandrzej1/develocraft-cypress#readme",
+  "devDependencies": {
+    "@faker-js/faker": "^10.1.0",
+    "@types/node": "^24.10.1",
+    "cypress": "^15.6.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
