@@ -11,7 +11,7 @@ describe('Product Searching and Filtering', () => {
     cy.visit(Routes.SHOP);
   });
 
-  it('should search for google nest and display relevant products', () => {
+  it('should search for products and display relevant results', () => {
     searchResultsActions.search(SEARCH_TERM);
     searchResultsAssertions.assertSearchResults(SEARCH_TERM);
     searchResultsAssertions.assertProductsMatchCriteria({ searchTerm: SEARCH_TERM });
@@ -26,7 +26,7 @@ describe('Product Searching and Filtering', () => {
     searchResultsAssertions.assertProductsMatchCriteria({ minPrice, maxPrice });
   });
 
-  it('should search for google nest, apply price filters and verify products match both criteria', () => {
+  it('should search for products, apply price filters and verify products match both criteria', () => {
     const minPrice = 50;
     const maxPrice = 100;
     
