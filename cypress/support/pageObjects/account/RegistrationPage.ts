@@ -15,8 +15,7 @@ class RegistrationPageActions {
   }
 
   /**
-   * Fills registration form with provided user data.
-   * @param user - User data (email and/or password). Partial fields are allowed for validation tests.
+   * @param user - Partial fields are allowed for validation tests.
    */
   fillForm(user: Partial<SignupPayload> = {}) {
     if (user.email) {
@@ -50,10 +49,6 @@ class RegistrationPageAssertions {
     });
   }
 
-  /**
-   * Asserts that a field is required (HTML5 validation).
-   * @param selector - CSS selector for the input field
-   */
   private assertFieldRequired(selector: string) {
     cy.get(selector).then(($input) => {
       const input = $input[0] as HTMLInputElement;
@@ -61,9 +56,6 @@ class RegistrationPageAssertions {
     });
   }
 
-  /**
-   * Asserts that both email and password fields show required validation.
-   */
   assertRequiredFieldValidation() {
     this.assertFieldRequired(selectors.emailInput);
     this.assertFieldRequired(selectors.passwordInput);

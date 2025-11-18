@@ -14,10 +14,6 @@ const selectors = {
 } as const;
 
 class SearchResultsPageActions {
-  /**
-   * Performs product search.
-   * @param term - Search term
-   */
   search(term: string) {
     cy.get(selectors.searchInput).first().clear().type(term);
     cy.contains(selectors.searchButton, 'Search').first().click();
@@ -55,7 +51,6 @@ class SearchResultsPageActions {
   }
 
   /**
-   * Opens product page by clicking on product at specified index.
    * @param index - Product index (default: 0)
    */
   openProductAt(index: number = 0) {
@@ -64,36 +59,22 @@ class SearchResultsPageActions {
 }
 
 class SearchResultsPageAssertions {
-  /**
-   * Gets product cards element (private helper method).
-   * @returns Cypress chainable with product cards
-   */
   private getProductCards() {
     return cy.get(selectors.productCards);
   }
 
-  /**
-   * Asserts that search results are displayed.
-   * @param term - Search term
-   */
   assertSearchResults(term: string) {
     this.getProductCards().should('exist').and('have.length.greaterThan', 0);
   }
 
   /**
    * Asserts that price filter was applied (checks URL parameters).
-   * @param minPrice - Minimum price
-   * @param maxPrice - Maximum price
    */
   assertPriceFilterApplied(minPrice: number, maxPrice: number) {
     cy.url().should('include', `min_price=${minPrice}`).and('include', `max_price=${maxPrice}`);
     this.getProductCards().should('exist');
   }
 
-  /**
-   * Asserts that all visible products match the search term (case-insensitive).
-   * @param searchTerm - The search term to match against product titles
-   */
   assertProductsMatchSearchTerm(searchTerm: string) {
     this.getProductCards().then(($cards) => {
       cy.wrap($cards).each(($card) => {
@@ -141,9 +122,7 @@ class SearchResultsPageAssertions {
   }
 
   /**
-   * Asserts that all visible products match the provided criteria.
    * Combines search term and price range validation.
-   * @param options - Criteria to match (searchTerm, minPrice, maxPrice)
    */
   assertProductsMatchCriteria(options: { searchTerm?: string; minPrice?: number; maxPrice?: number }) {
     if (options.searchTerm) {

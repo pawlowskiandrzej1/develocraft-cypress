@@ -14,10 +14,6 @@ class LoginPageActions {
     cy.visit(Routes.MY_ACCOUNT);
   }
 
-  /**
-   * Fills login form with provided credentials.
-   * @param credentials - Login credentials (email and password)
-   */
   fillCredentials(credentials: LoginPayload) {
     cy.get(selectors.usernameInput).clear().type(credentials.email);
     cy.get(selectors.passwordInput).clear().type(credentials.password);
@@ -37,7 +33,6 @@ class LoginPageAssertions {
   }
 
   /**
-   * Asserts that login error message is displayed.
    * @param message - Optional expected error message text
    */
   assertLoginError(message?: string) {
